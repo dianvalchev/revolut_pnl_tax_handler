@@ -24,6 +24,22 @@ class ExcelHandler:
 
         return data
 
+    @staticmethod
+    def create_result_file():
+        # define the results file name
+        filepath = "ResultFile.xlsx"
+
+        # create the file and delete the default sheet
+        wb = xl.Workbook()
+        ws = wb.active
+        wb.remove(ws)
+
+        # TODO: the parse logic goes here...
+        wb.create_sheet("SheetTitle")
+
+        wb.save(filepath)
+        print("File saved.")
+
 
 if __name__ == "__main__":
     statement_file_name = "trading-pnl-statement_2019-11-01_2024-01-01_en-us_d59d3d.xlsx"  # 2019-2023 PnL
