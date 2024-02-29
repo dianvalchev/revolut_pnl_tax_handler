@@ -2,7 +2,7 @@ import scrapy
 from datetime import timedelta, datetime
 from scrapy.crawler import CrawlerProcess
 
-result = []
+result = {}
 
 
 class SingleDateSpider(scrapy.Spider):
@@ -45,10 +45,7 @@ class SingleDateSpider(scrapy.Spider):
 
         if result_date:
             # print(f"Exchange rate found for {self.selected_date.strftime('%Y-%m-%d')}...")
-            result.append({
-                'Date': self.initial_date.strftime('%Y-%m-%d'),
-                'Price': float(result_price.strip())
-            })
+            result[self.initial_date.strftime('%Y-%m-%d')] = float(result_price.strip())
         else:
             # Generate an url browsing one day in the past and parse it
 
