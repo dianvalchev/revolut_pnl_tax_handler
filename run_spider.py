@@ -6,6 +6,7 @@ result = {}
 
 
 class SingleDateSpider(scrapy.Spider):
+    spider_result = result
     name = "singledate"
     allowed_domains = ["www.bnb.bg"]
     url = ""
@@ -52,7 +53,7 @@ class SingleDateSpider(scrapy.Spider):
             self.current_date -= timedelta(days=1)
             self.generate_url()
             yield scrapy.Request(self.url, callback=self.parse)
-
+        result["a"] = 2
 
 class RunSpider:
     def __init__(self, dates):
