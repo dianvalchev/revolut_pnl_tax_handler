@@ -29,7 +29,7 @@ def generate():
     if my_spider.result:
         my_handler.create_result_file()
         my_handler.add_bgn_pnl_to_result_file(my_spider.result)
-        print("Result file created.")
+        print("Result file created...")
     else:
         print("run_spider result empty.")
 
