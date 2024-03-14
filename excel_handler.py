@@ -47,7 +47,7 @@ class ExcelHandler:
         # parse all the sheets and fill BGN data
         for sheet in wb.sheetnames:
             ws = wb[sheet]
-            pnl_total = 0.00  # placeholder for total due ammount
+            pnl_total = 0.00  # placeholder for total due amount
 
             # add the new header row items (BGN)
             for item in ['Date Acquired (BGN/USD)', 'Date Sold (BGN/USD)', 'Cost basis (BGN)', 'Amount (BGN)',
@@ -96,6 +96,7 @@ class ExcelHandler:
         wb.save(self.result_file)
 
 
+# Test the Excel handler
 if __name__ == "__main__":
     example_data = {'2019-11-27': 1.77657, '2020-01-28': 1.77722, '2019-11-25': 1.77674, '2021-09-14': 1.65552,
                     '2022-06-10': 1.84896, '2021-11-15': 1.70904, '2020-02-28': 1.78175, '2020-06-05': 1.72624,

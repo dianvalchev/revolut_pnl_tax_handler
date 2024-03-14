@@ -1,8 +1,11 @@
-import tkinter as tk
 from datetime import datetime
-from tkinter import filedialog
-from excel_handler import ExcelHandler
+
+import run_spider
 from run_spider import RunSpider
+from excel_handler import ExcelHandler
+
+import tkinter as tk
+from tkinter import filedialog
 
 
 def browse_file():
@@ -10,11 +13,13 @@ def browse_file():
     if file_path:
         entry_path.delete(0, tk.END)
         entry_path.insert(0, file_path)
+        loading_label.config(text='Press "Generate"')
 
 
 def generate():
     file_path = entry_path.get()
     statement_file_name = file_path
+
     my_handler = ExcelHandler(statement_file_name)
 
     # extract all the "acquired" and "sold" dates from the file and put them in a sorted list for parsing
@@ -25,11 +30,13 @@ def generate():
     # run the scrapy spider to retrieve all the FX rates for the corresponding dates
     my_spider = RunSpider(date_list)
     my_spider.run()
+
     # create a new Excel file with the transactions in BGN and PnL calculation
-    if my_spider.result:
+    if run_spider.result:
         my_handler.create_result_file()
-        my_handler.add_bgn_pnl_to_result_file(my_spider.result)
+        my_handler.add_bgn_pnl_to_result_file(run_spider.result)
         print("Result file created.")
+        loading_label.config(text=" Done. ")
     else:
         print("run_spider result empty.")
 
@@ -55,5 +62,12 @@ button_browse.grid(row=0, column=2)
 # Generate button
 button_generate = tk.Button(root, text="Generate", command=generate)
 button_generate.pack()
+
+empty_row = tk.Frame(height=50)
+empty_row.pack()
+
+# Loading label
+loading_label = tk.Label(root, bd=1, relief="solid", width=40, text="   Select Revolut PnL statement file...   ")
+loading_label.pack()
 
 root.mainloop()
