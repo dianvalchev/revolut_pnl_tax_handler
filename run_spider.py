@@ -59,6 +59,7 @@ class SingleDateSpider(scrapy.Spider):
         if result_price:
             # add the FX rate to the result dictionary
             result[self.selected_date.strftime('%Y-%m-%d')] = float(result_price.strip())
+
         else:
             # Generate an url browsing one day in the past and parse it
             self.current_date -= timedelta(days=1)
@@ -73,6 +74,7 @@ class RunSpider:
     def run(self):
         # create the scrapy crawler process
         process = CrawlerProcess({
+            'TELNETCONSOLE_ENABLED': False,
             'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
                           'AppleWebKit/537.36 (KHTML, like Gecko) '
                           'Chrome/58.0.3029.110 Safari/537.3',
