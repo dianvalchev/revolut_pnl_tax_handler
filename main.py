@@ -1,4 +1,4 @@
-from datetime import datetime, datetime_CAPI
+from datetime import datetime
 import run_spider
 from run_spider import RunSpider
 from excel_handler import ExcelHandler
