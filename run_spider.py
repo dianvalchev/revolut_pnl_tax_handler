@@ -53,8 +53,8 @@ class SingleDateSpider(scrapy.Spider):
 
     def parse(self, response):
         # Get the date and the price for USD/BGN exchange rate for the selected date (if available)
-        # result_date = response.css("td.first.center::text").get()
-        result_price = response.css("td.last.center::text").get()
+        # result_date = response.css("tr.last.center > td:nth-child(1)::text").get()
+        result_price = response.css("tr.last.center > td:nth-child(3)::text").get()
 
         if result_price:
             # add the FX rate to the result dictionary
